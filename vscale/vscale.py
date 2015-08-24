@@ -23,11 +23,15 @@ class Vscale(object):
 
     def scalet_start(self, scalet_id):
         json = self.request('/scalets/%s/start' % scalet_id, method='PATCH')
-        return json['status']
+        return json
 
     def scalet_stop(self, scalet_id):
         json = self.request('/scalets/%s/stop' % scalet_id, method='PATCH')
-        return json['status']
+        return json
+
+    def scalet_restart(self, scalet_id):
+        json = self.request('/scalets/%s/restart' % scalet_id, method='PATCH')
+        return json
 
 
     def scalet_create(self, name, password, plan, image, location, keys=None, autostart=True,):
@@ -50,6 +54,8 @@ class Vscale(object):
     def scalet_delete(self, scalet_id):
         json = self.request('/scalets/%s' % scalet_id, method='DELETE')
         return json
+
+
     # get locations list
     def location_list(self):
         json = self.request('/locations')
