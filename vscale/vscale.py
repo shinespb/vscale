@@ -37,6 +37,12 @@ class Vscale(object):
         json = self.request('/scalets/%s/restart' % scalet_id, method='PATCH')
         return json
 
+    def scalet_upgrade(self, scalet_id, plan):
+        params = {
+            'rplan': str(plan)
+        }
+        json = self.request('/scalets/%s/upgrade' % scalet_id, params, method='POST')
+        return json
 
     def scalet_create(self, name, password, plan, image, location, keys=None, autostart=True,):
         params = {
