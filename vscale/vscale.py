@@ -47,6 +47,9 @@ class Vscale(object):
 
         return json
 
+    def scalet_delete(self, scalet_id):
+        json = self.request('/scalets/%s' % scalet_id, method='DELETE')
+        return json
     # get locations list
     def location_list(self):
         json = self.request('/locations')
