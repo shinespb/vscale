@@ -29,6 +29,24 @@ class Vscale(object):
         json = self.request('/scalets/%s/stop' % scalet_id, method='PATCH')
         return json['status']
 
+
+    def scalet_create(self, name, password, plan, image, location, keys=None, autostart=True,):
+        params = {
+            'name': str(name),
+            'password': str(password),
+            'rplan': str(plan),
+            'make_from': str(image),
+            'do_start': bool(autostart),
+            'location': str(location),
+        }
+        if keys:
+            if type(keys) == list:
+                params['keys'] = keys
+
+        json = self.request('/scalets', params, method='POST')
+
+        return json
+
     # get locations list
     def location_list(self):
         json = self.request('/locations')
@@ -47,6 +65,10 @@ class Vscale(object):
     def sshkey_add(self, keyname, pubkey):
         params = {"name": keyname, "key": pubkey}
         json = self.request('/sshkeys', params, method='POST')
+        return json
+
+    def sshkey_delete(self, key_id):
+        json = self.request('/sshkeys/%s' % key_id, method='DELETE')
         return json
 
     def request(self, path, params={}, method='GET'):
