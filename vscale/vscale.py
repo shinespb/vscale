@@ -21,6 +21,10 @@ class Vscale(object):
         json = self.request('/scalets')
         return json
 
+    def scalet_info(self, scalet_id):
+        json = self.request('/scalets/%s' % scalet_id)
+        return json
+
     def scalet_start(self, scalet_id):
         json = self.request('/scalets/%s/start' % scalet_id, method='PATCH')
         return json
